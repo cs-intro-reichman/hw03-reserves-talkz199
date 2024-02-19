@@ -11,7 +11,12 @@ public class UniqueChars {
      * unless they are space characters.
      */
     public static String uniqueChars(String s) {
-        // Replace the following statement with your code
+
+     if (str.charAt(i) == str.charAt(i+1)) {
+        
+
+        
+     }
         return null;
     }
 }
