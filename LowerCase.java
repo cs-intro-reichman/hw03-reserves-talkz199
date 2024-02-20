@@ -24,9 +24,11 @@ public class LowerCase {
               // Convert uppercase to lowercase by adding the ASCII difference
               word[i] = (char) (currentChar + ('a' - 'A'));
           } else {
-              word[i] = currentChar; // Keep non-letter characters as they are
+              word[i] = currentChar; // Keep non-letter characters as they are/
+        
           }
       }
+
 
       return new String(word); // Convert char array to string and return
   }
