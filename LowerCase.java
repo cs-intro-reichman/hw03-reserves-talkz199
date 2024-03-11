@@ -4,7 +4,7 @@ public class LowerCase {
       String str = "";
 
       for (int i = 0; i < numWords; i++) {
-          str = str + " " + args[i];
+          str = str + "" + args[i];
       }
       System.out.println(lowerCase(str));
   }

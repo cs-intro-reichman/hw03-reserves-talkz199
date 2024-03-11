@@ -12,7 +12,7 @@ public class LoanCalc {
      * interest rate (double, as a percentage), and number of payments (int).  
      */
 	public static void main(String[] args) {		
-		// Gets the loan data
+		// Gets the loan dataמתי
 		double loan = Double.parseDouble(args[0]);
 		double rate = Double.parseDouble(args[1]);
 		int n = Integer.parseInt(args[2]);
