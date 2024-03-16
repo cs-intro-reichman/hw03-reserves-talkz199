@@ -42,7 +42,7 @@ public class LoanCalc {
     	// Replace the following statement with your code
 		 double guess = loan/n;
 		 iterationCounter=0;
-		while (endBalance(loan, rate, n, guess)> 0) {
+		while (endBalance(loan, rate, n, guess)+ epsilon > 0) {
 			guess = guess +epsilon;
 			iterationCounter++;
 		}
@@ -57,28 +57,27 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-		double lo = loan /n ; 
+	
+		double lo = loan/n; 
 		double hi = loan; 
 		double guess = (lo + hi) / 2;
 		
 		iterationCounter = 0;
-		
-		while (hi - lo > epsilon) {
-			if (endBalance(loan, rate, n, guess) * endBalance(loan, rate, n, lo) > 0){
-				lo = guess;	
-			}
+	
+		while (((hi-lo)) > epsilon) {
+			if (endBalance(loan, rate, n, guess) * endBalance(loan, rate, n, lo) > 0)
+				lo = guess;
 			else{
-				hi = guess;
+				hi = guess; 
 			}
-				
 			guess = (lo + hi) / 2;
 			iterationCounter++;
+			
 		}
 		
 		return guess;
 	}
 	
-		
     
 	
 	
@@ -89,9 +88,9 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double guess) {
 		// Replace the following statement with your code
 		double endBalance = loan;
-		for(int i=0;i<=n;i++){
+		for(int i=1;i<=n;i++){
 			endBalance = endBalance - guess;	//loan after yearly payment
-			endBalance = endBalance + endBalance * rate; //loan after rate
+			endBalance = endBalance + endBalance * rate/100; //loan after rate
 		}
 		
     	return endBalance;	// the function will return the rest of the loan
