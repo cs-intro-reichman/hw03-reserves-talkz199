@@ -12,7 +12,7 @@ public class LoanCalc {
      * interest rate (double, as a percentage), and number of payments (int).  
      */
 	public static void main(String[] args) {		
-		// Gets the loan dataמתי
+		// Gets the loan data
 		double loan = Double.parseDouble(args[0]);
 		double rate = Double.parseDouble(args[1]);
 		int n = Integer.parseInt(args[2]);
@@ -39,20 +39,23 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-		 double guess = loan/n;
-		 iterationCounter=0;
-		while (endBalance(loan, rate, n, guess)> 0) {
-			guess = guess +epsilon;
-			iterationCounter++;
+    	double guess = loan / n; // Initial guess
+		double increment = epsilon; // Increment
+		iterationCounter = 0; // Reset iteration counter
+
+		// Loop until the ending balance becomes non-positive
+		while (endBalance(loan, rate, n, guess) > 0) {
+			guess += increment; // Increment guess
+			iterationCounter++; // Increment iteration counter
 		}
-    	return guess;
+
+		return guess; // Return the computed periodical payment
     }
     
     /**
 	* Uses bisection search to compute an approximation of the periodical payment 
 	* that will bring the ending balance of a loan close to 0.
-	* Given: the sum of theloan, the periodical interest rate (as a percentage),
+	* Given: the sum of the loan, the periodical interest rate (as a percentage),
 	* the number of periods (n), and epsilon, a tolerance level.
 	*/
 	// Side effect: modifies the class variable iterationCounter.
@@ -76,21 +79,17 @@ public class LoanCalc {
 		return guess;
 	}
 	
-    
-	
-	
 	/**
 	* Computes the ending balance of a loan, given the sum of the loan, the periodical
 	* interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	*/
-	private static double endBalance(double loan, double rate, int n, double payment) {
-		// Replace the following statement with your code
-		for(int i=0;i<n;i++){
-			loan = loan - payment;	//loan after yearly payment
-			loan = loan + loan * rate; //loan after rate
+	private static double endBalance(double loan, double rate, int n, double guess) {
+		double endBalance = loan;
+		for(int i = 0; i < n; i++){
+			endBalance = (endBalance - guess) * (1 + rate / 100); // Update ending balance after payment and interest
 		}
 		
-    	return loan;	// the function will return the rest of the loan
-	
+		return endBalance;
+	}
 }
-}
+
